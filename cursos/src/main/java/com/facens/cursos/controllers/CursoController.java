@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.facens.cursos.models.Curso;
 import com.facens.cursos.services.CursoService;
 
-import jakarta.websocket.server.PathParam;
-
 @RestController
 @RequestMapping("/cursos")
 public class CursoController {
@@ -30,7 +28,7 @@ public class CursoController {
     }
 
     @GetMapping("/by-nome/{name}")
-    public Curso getByName(@PathParam("name") String name){
+    public Curso getByName(@PathVariable String name){
         return cursoService.findByNome(name);
     }
 
