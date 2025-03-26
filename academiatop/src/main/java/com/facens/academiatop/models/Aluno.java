@@ -73,10 +73,7 @@ public class Aluno {
         this.plano = plano;
     }
 
-    @ManyToMany
-    @JoinTable(name="aluno_funcionario", 
-        joinColumns = @JoinColumn(name="aluno_id"),
-        inverseJoinColumns = @JoinColumn(name = "funcionario_id"))
+    @ManyToMany(mappedBy = "alunos")
     private List<Funcionario> funcionarios;
     public List<Funcionario> getFuncionarios() {
         return funcionarios;

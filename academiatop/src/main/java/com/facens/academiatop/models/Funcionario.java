@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import com.facens.academiatop.Cargos;
 import com.fasterxml.jackson.annotation.JsonIgnore;
