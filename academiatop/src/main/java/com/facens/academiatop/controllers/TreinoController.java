@@ -17,7 +17,7 @@ public class TreinoController {
     @Autowired
     private TreinoService treinoService;
 
-    @GetMapping("/{alunoId}") //histórico
+    @GetMapping("/aluno/{alunoId}") //histórico
     public Iterable<Treino> historico(@PathVariable Long alunoId){
         return treinoService.findAllByAlunoId(alunoId);
     }

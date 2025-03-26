@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.facens.academiatop.TipoPlano;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -85,6 +86,7 @@ public class Aluno {
     }
 
     @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Treino> treinos = new ArrayList<>();
     public List<Treino> getTreinos() {
         return treinos;

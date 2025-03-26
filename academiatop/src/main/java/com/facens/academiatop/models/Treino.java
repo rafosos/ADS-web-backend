@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,14 +40,12 @@ public class Treino {
     }
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "aluno_id")
     private Aluno aluno;
-    
-    @JsonIgnore //prevenir recursão infinita no get
     public Aluno getAluno() {
         return aluno;
     }
-
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
     }
