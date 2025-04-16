@@ -18,12 +18,44 @@ public class Funcionario {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int Id;
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
     @Column ( nullable= false, length= 255)
     private String nome;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     @Column (nullable= false, length = 11)
     private String cpf;
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     @OneToMany( mappedBy= "funcionario", cascade = CascadeType.ALL)
     private List<Venda> vendas = new ArrayList<>();
+
+    public List<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<Venda> vendas) {
+        this.vendas = vendas;
+    }
 }

@@ -22,7 +22,7 @@ public class VendaController {
     @Autowired
     private VendaService vendaService;
 
-        @GetMapping("/")
+    @GetMapping("/")
     public Iterable<Venda> getAll(){
         return vendaService.getAll();
     }
@@ -33,12 +33,12 @@ public class VendaController {
     }
 
     @PostMapping("/")
-    public Venda add(@RequestBody Venda venda){
+    public Venda add(@RequestBody Venda venda) throws Exception{
         return vendaService.add(venda);
     }
 
     @PatchMapping("/")
-    public Venda edit(@RequestBody Venda venda){
+    public Venda edit(@RequestBody Venda venda) throws Exception{
         return vendaService.edit(venda);
     }
 
