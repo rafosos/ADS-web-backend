@@ -1,5 +1,8 @@
 package com.facens.lojaeletronico.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +55,14 @@ public class VendaService {
         if (venda.getFuncionario() == null){
             throw new Exception("Para adicionar uma venda tem que ter funcionario");
         }
+
+        List<Produto> produtosEntidades = new ArrayList<>(); 
+        venda.getProdutos().forEach(p -> {
+            Produto prodEntidade = produtoRepository.findById(p.getId()).get();
+            produtosEntidades.add(prodEntidade);
+        });
+
+        venda.setProdutos(produtosEntidades);
 
         return vendaRepository.save(venda);
     }

@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Venda {
 
+    public Venda() {    }
     public Venda(Cliente cliente, Funcionario funcionario) {
         this.cliente = cliente;
         this.funcionario = funcionario;
@@ -58,16 +59,14 @@ public class Venda {
         this.funcionario = funcionario;
     }
 
-    @ ManyToMany ( cascade = CascadeType.ALL)
+    @ManyToMany( cascade = CascadeType.ALL)
     @JoinTable(name = "produto_venda",
     joinColumns={@JoinColumn(name = "venda_id")},
     inverseJoinColumns= {@JoinColumn(name = "produto_id")})
     private List<Produto> produtos;
-
     public List<Produto> getProdutos() {
         return produtos;
     }
-
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }

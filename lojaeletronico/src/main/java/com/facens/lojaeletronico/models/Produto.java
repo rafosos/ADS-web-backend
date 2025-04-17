@@ -1,6 +1,9 @@
 package com.facens.lojaeletronico.models;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +14,14 @@ import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Produto {
+
+    public Produto() { }
+    public Produto(String nome, String codBarra, Double preco) {
+        this.nome = nome;
+        this.codBarra = codBarra;
+        this.preco = preco;
+        this.vendas = new ArrayList<>();
+    }
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -58,8 +69,8 @@ public class Produto {
     }
 
     @ManyToMany (mappedBy= "produtos")
+    @JsonBackReference
     private List<Venda> vendas;
-
     public List<Venda> getVendas() {
         return vendas;
     }

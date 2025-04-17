@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.facens.lojaeletronico.models.Funcionario;
 import com.facens.lojaeletronico.services.FuncionarioService;
 
-import jakarta.websocket.server.PathParam;
 
 
 @RestController
@@ -29,7 +29,7 @@ public class FuncionarioController {
     }
 
     @GetMapping("/{id}")
-    public Funcionario getById(@PathParam("id") int  id){
+    public Funcionario getById(@PathVariable int  id){
         return funcionarioService.getById(id);
     }
 
@@ -44,7 +44,7 @@ public class FuncionarioController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathParam("id") int  id){
+    public void deleteById(@PathVariable int  id){
        funcionarioService.deleteById(id);
     }
 }

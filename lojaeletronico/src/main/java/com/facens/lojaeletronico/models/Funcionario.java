@@ -3,6 +3,8 @@ package com.facens.lojaeletronico.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +15,13 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Funcionario {
+
+    public Funcionario() {   }
+    public Funcionario(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.vendas = new ArrayList<>();
+    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -49,6 +58,7 @@ public class Funcionario {
     }
 
     @OneToMany( mappedBy= "funcionario", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Venda> vendas = new ArrayList<>();
 
     public List<Venda> getVendas() {
