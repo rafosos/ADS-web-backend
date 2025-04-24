@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.facens.bolo.dtos.PedidoDTO;
+import com.facens.bolo.exceptions.RegraNegocioException;
 import com.facens.bolo.model.Pedido;
 import com.facens.bolo.model.Sabor;
 import com.facens.bolo.model.SaborPedido;
@@ -29,7 +30,7 @@ public class PedidoService implements IPedidoService{
 
         List<SaborPedido> sabores = new ArrayList<SaborPedido>();
         pedido.getSabores().forEach(s -> {
-            Sabor sabor = saborRepository.findById(s.getSaborId()).get();
+            Sabor sabor = saborRepository.findById(s.getSaborId()).orElseThrow(() -> new RegraNegocioException("Sabor não encontrado!"));
             SaborPedido saborPedido = new SaborPedido();
             saborPedido.setSabor(sabor);
             saborPedido.setQuantidade(s.getQuantidade());
@@ -47,7 +48,7 @@ public class PedidoService implements IPedidoService{
 
     @Override
     public Pedido atualizarStatus(PedidoDTO pedido){
-        Pedido entidade = pedidoRepository.findById(pedido.getId()).get();
+        Pedido entidade = pedidoRepository.findById(pedido.getId()).orElseThrow(() -> new RegraNegocioException("Pedido não encontrado!"));
         entidade.setStatus(pedido.getStatus());
         return pedidoRepository.save(entidade);
     }
