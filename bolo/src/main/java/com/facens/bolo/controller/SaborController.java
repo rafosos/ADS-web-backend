@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.facens.bolo.dtos.SaborDTO;
 import com.facens.bolo.model.Sabor;
 import com.facens.bolo.service.SaborService;
 
@@ -22,17 +23,17 @@ public class SaborController {
 
     @GetMapping("/")
     public Iterable<Sabor> getAll(){
-        return saborService.getAll();
+        return saborService.getSabores();
     }
 
     @GetMapping("/{id}")
-    public Sabor getById(@PathVariable int  id){
+    public Sabor getById(@PathVariable int id){
         return saborService.getById(id);
     }
 
     @PostMapping("/")
-    public Sabor add(@RequestBody Sabor sabor){
-        return saborService.add(sabor);
+    public Sabor add(@RequestBody SaborDTO sabor){
+        return saborService.salvar(sabor);
     }
 
     @PatchMapping("/")

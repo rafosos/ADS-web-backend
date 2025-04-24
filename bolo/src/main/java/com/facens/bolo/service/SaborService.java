@@ -3,19 +3,21 @@ package com.facens.bolo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.facens.bolo.dtos.SaborDTO;
 import com.facens.bolo.model.Sabor;
 import com.facens.bolo.repository.SaborRepository;
 
 @Service
-
-public class SaborService {
-
+public class SaborService implements ISaborService{
 
     @Autowired
     private SaborRepository saborRepository;
 
-    public Sabor add(Sabor sabor){
-        return saborRepository.save(sabor);
+    @Override
+    public Sabor salvar(SaborDTO sabor){
+        Sabor entidade = new Sabor();
+        entidade.setNome(sabor.getNome());
+        return saborRepository.save(entidade);
     }
 
     public Sabor edit(Sabor sabor){
@@ -26,11 +28,12 @@ public class SaborService {
         return saborRepository.findById(id).get();
     }
 
-    public Iterable<Sabor> getAll(){
+    @Override
+    public Iterable<Sabor> getSabores(){
         return saborRepository.findAll();
     }
 
-    public void deleteById(int  id){
+    public void deleteById(int id){
         saborRepository.deleteById(id);
     }
 }

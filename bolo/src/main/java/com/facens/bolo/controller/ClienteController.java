@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.facens.bolo.dtos.ClienteDTO;
 import com.facens.bolo.model.Cliente;
 import com.facens.bolo.service.ClienteService;
 
 @RestController
 @RequestMapping("/cliente")
-
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
     @GetMapping("/")
     public Iterable<Cliente> getAll(){
-        return clienteService.getAll();
+        return clienteService.getClientes();
     }
 
     @GetMapping("/{id}")
-    public Cliente getById(@PathVariable int  id){
+    public Cliente getById(@PathVariable int id){
         return clienteService.getById(id);
     }
 
     @PostMapping("/")
-    public Cliente add(@RequestBody Cliente cliente){
-        return clienteService.add(cliente);
+    public Cliente add(@RequestBody ClienteDTO cliente){
+        return clienteService.salvar(cliente);
     }
 
     @PatchMapping("/")
@@ -41,7 +41,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable int  id){
+    public void deleteById(@PathVariable int id){
        clienteService.deleteById(id);
     }
 }

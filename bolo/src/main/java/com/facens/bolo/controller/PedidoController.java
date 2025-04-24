@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.facens.bolo.dtos.PedidoDTO;
 import com.facens.bolo.model.Pedido;
 import com.facens.bolo.service.PedidoService;
 
@@ -22,22 +23,22 @@ public class PedidoController {
 
     @GetMapping("/")
     public Iterable<Pedido> getAll(){
-        return pedidoService.getAll();
+        return pedidoService.getPedidos();
     }
 
     @GetMapping("/{id}")
-    public Pedido getById(@PathVariable int  id){
+    public Pedido getById(@PathVariable int id){
         return pedidoService.getById(id);
     }
 
     @PostMapping("/")
-    public Pedido add(@RequestBody Pedido pedido){
-        return pedidoService.add(pedido);
+    public Pedido add(@RequestBody PedidoDTO pedido){
+        return pedidoService.salvar(pedido);
     }
 
-    @PatchMapping("/")
-    public Pedido edit(@RequestBody Pedido pedido){
-        return pedidoService.edit(pedido);
+    @PatchMapping("/status")
+    public Pedido atualizarStatus(@RequestBody PedidoDTO pedido){
+        return pedidoService.atualizarStatus(pedido);
     }
 
     @DeleteMapping("/{id}")

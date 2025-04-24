@@ -1,33 +1,59 @@
 package com.facens.bolo.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.facens.bolo.dtos.PedidoDTO;
 import com.facens.bolo.model.Pedido;
+import com.facens.bolo.model.Sabor;
+import com.facens.bolo.model.SaborPedido;
 import com.facens.bolo.repository.PedidoRepository;
+import com.facens.bolo.repository.SaborRepository;
 
 @Service
-
-public class PedidoService {
+public class PedidoService implements IPedidoService{
 
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public Pedido add(Pedido pedido){
-        
-        return pedidoRepository.save(pedido);
+    @Autowired
+    private SaborRepository saborRepository;
+
+    @Override
+    public Pedido salvar(PedidoDTO pedido){
+        Pedido entidade = new Pedido();
+        entidade.setStatus(pedido.getStatus());
+
+        List<SaborPedido> sabores = new ArrayList<SaborPedido>();
+        pedido.getSabores().forEach(s -> {
+            Sabor sabor = saborRepository.findById(s.getSaborId()).get();
+            SaborPedido saborPedido = new SaborPedido();
+            saborPedido.setSabor(sabor);
+            saborPedido.setQuantidade(s.getQuantidade());
+            sabores.add(saborPedido);
+        });
+        entidade.setSabores(sabores);
+
+        return pedidoRepository.save(entidade);
     }
 
-    public Pedido edit(Pedido pedido){
-        return pedidoRepository.save(pedido);
+    @Override
+    public Iterable<Pedido> getPedidos(){
+        return pedidoRepository.findAll();
+    }
+
+    @Override
+    public Pedido atualizarStatus(PedidoDTO pedido){
+        Pedido entidade = pedidoRepository.findById(pedido.getId()).get();
+        entidade.setStatus(pedido.getStatus());
+        return pedidoRepository.save(entidade);
     }
 
     public Pedido getById(int  id){
         return pedidoRepository.findById(id).get();
-    }
-
-    public Iterable<Pedido> getAll(){
-        return pedidoRepository.findAll();
     }
 
     public void deleteById(int  id){
