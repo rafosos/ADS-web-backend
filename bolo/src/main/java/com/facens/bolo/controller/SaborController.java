@@ -22,7 +22,7 @@ public class SaborController {
 
     @GetMapping("/")
     public Iterable<Sabor> getAll(){
-        return SaborService.getAll();
+        return saborService.getAll();
     }
 
     @GetMapping("/{id}")

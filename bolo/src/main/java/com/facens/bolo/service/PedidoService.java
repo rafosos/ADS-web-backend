@@ -10,16 +10,16 @@ import com.facens.bolo.repository.PedidoRepository;
 
 public class PedidoService {
 
-
     @Autowired
     private PedidoRepository pedidoRepository;
 
     public Pedido add(Pedido pedido){
+        
         return pedidoRepository.save(pedido);
     }
 
     public Pedido edit(Pedido pedido){
-        return PedidoRepository.save(pedido);
+        return pedidoRepository.save(pedido);
     }
 
     public Pedido getById(int  id){

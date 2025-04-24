@@ -22,7 +22,7 @@ public class PedidoController {
 
     @GetMapping("/")
     public Iterable<Pedido> getAll(){
-        return PedidoService.getAll();
+        return pedidoService.getAll();
     }
 
     @GetMapping("/{id}")
