@@ -17,7 +17,6 @@ import lombok.Data;
 @Data
 public class Produto {
     @Id
-    @NotNull(message = "O id não pode ser nulo.")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

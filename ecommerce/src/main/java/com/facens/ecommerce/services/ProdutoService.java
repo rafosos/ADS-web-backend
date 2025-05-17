@@ -20,6 +20,11 @@ public class ProdutoService implements IProdutoService{
     @Override
     public Produto salvar(ProdutoDTO produto) {
         Produto entidade = new Produto();
+        entidade.setNome(produto.getNome());
+        entidade.setPreco(produto.getPreco());
+        entidade.setQuantidadeEstoque(produto.getQuantidadeEstoque());
+        entidade.setCategoria(produto.getCategoria());
+        entidade.setDescricao(produto.getDescricao());
         return produtoRepository.save(entidade);
     }
 
